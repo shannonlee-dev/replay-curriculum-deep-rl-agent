@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<!-- FONT_LICENSE -->
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101c19">
+<title>THE GAME — Model Observatory</title>
+<style>/* REPLAY_STYLE */</style>
+</head>
+<body>
+<div class="app">
+<header class="masthead">
+  <a class="brand" href="#" aria-label="처음으로"><span class="brand-mark">↟</span><span>THE GAME<small>MODEL OBSERVATORY</small></span></a>
+  <div class="edition"><span class="live-dot"></span> AGENT AT THE TABLE <span class="edition-number">VOL. 001</span></div>
+  <div class="header-actions"><button id="sound" class="icon-button" aria-pressed="false" title="카드 효과음 켜기">♪ <span>소리 꺼짐</span></button><button id="rules" class="outline-button">게임 규칙 <span>↗</span></button></div>
+</header>
+<main>
+<section class="intro"><div><div class="eyebrow">A GAME OF NUMBERS. A STUDY IN DECISIONS.</div><h1>한 수에 담긴, <em>모델의 선택.</em></h1><p>카드를 내고, 흐름을 되돌리고, 마지막 한 장까지. 학습된 에이전트의 테이블을 관전하세요.</p></div><div class="intro-stamp"><span>01 — 100</span><small>FOUR PILES. ONE OBJECTIVE.</small></div></section>
+<section class="session-bar" aria-label="대국 선택">
+  <div class="mode-switch" role="group" aria-label="시작 방식"><button data-mode="natural" class="selected" aria-pressed="true">전체 게임 <small>98 CARDS</small></button><button data-mode="reverse" aria-pressed="false">커리큘럼 <small id="reverse-label">R64</small></button></div>
+  <label class="game-select-label">대국 <select id="game-select" aria-label="기보 선택"></select></label>
+  <span class="session-note" id="session-note">무작위 덱 · 처음부터 시작</span>
+  <span class="recorded"><i></i> 실제 모델 기보</span>
+</section>
+<div class="arena-layout">
+<section class="arena" aria-label="게임 테이블">
+  <div class="table-top"><div class="table-label"><span class="tiny-star">✦</span> THE OBSERVATION ROOM <small id="table-subtitle">NATURAL / FULL DECK</small></div><div class="turn-indicator"><span>TURN</span><strong id="turn">01</strong><div><b id="turn-played">0</b><small id="turn-min">/ 2장 이상</small></div></div></div>
+  <div class="table-center">
+    <div class="pile-group"><div class="direction"><span>ASCENDING</span><b>01 <i>↗</i> 99</b></div><div class="pile-pair"><div class="pile-slot" data-pile="0"><div class="pile-shadow"></div><div class="playing-card pile-card ascending" id="pile-0"></div><span class="pile-label">PILE I <i>↑</i></span></div><div class="pile-slot" data-pile="1"><div class="pile-shadow"></div><div class="playing-card pile-card ascending" id="pile-1"></div><span class="pile-label">PILE II <i>↑</i></span></div></div></div>
+    <div class="table-divider"><span>✦</span></div>
+    <div class="pile-group"><div class="direction"><span>DESCENDING</span><b>100 <i>↘</i> 02</b></div><div class="pile-pair"><div class="pile-slot" data-pile="2"><div class="pile-shadow"></div><div class="playing-card pile-card descending" id="pile-2"></div><span class="pile-label">PILE III <i>↓</i></span></div><div class="pile-slot" data-pile="3"><div class="pile-shadow"></div><div class="playing-card pile-card descending" id="pile-3"></div><span class="pile-label">PILE IV <i>↓</i></span></div></div></div>
+  </div>
+  <div class="table-message" id="table-message" role="status">테이블이 준비됐습니다. 첫 수를 만나보세요.</div>
+  <div class="hand-zone"><div class="hand-heading"><div><span class="agent-avatar">A</span><span>THE AGENT<small>학습된 플레이어</small></span></div><div class="hand-meta"><span id="legal-count">0</span>개의 합법적 선택 <i>·</i> 손패 <b id="hand-count">8</b>장</div></div><div class="hand-and-deck"><div id="hand" class="hand" aria-label="모델의 손패"></div><div class="deck-area"><div class="deck-card"><div class="deck-emblem">↟<small>THE GAME</small></div></div><span>DRAW PILE <b id="deck-count">90</b></span></div></div></div>
+  <div class="table-footer"><span><i class="live-dot"></i> MASKABLE PPO</span><span>±10으로 흐름을 되돌릴 수 있습니다 <b>↶</b></span></div>
+</section>
+<aside class="sidebar" aria-label="기보와 게임 현황">
+  <section class="status-panel"><div class="panel-heading"><span>TABLE STATUS</span><span id="state-badge">READY</span></div><div class="big-stat"><strong id="remaining">98</strong><span>남은 카드<small>TO CLEAR THE TABLE</small></span><svg viewBox="0 0 50 50" class="progress-ring" aria-hidden="true"><circle cx="25" cy="25" r="20"/><circle id="progress-circle" cx="25" cy="25" r="20"/></svg></div><div class="mini-stats"><div><span>모델이 낸 카드</span><b id="played">00</b></div><div><span>되돌리기</span><b id="backward-count">00</b></div></div></section>
+  <section class="journal-panel"><div class="journal-heading"><h2>플레이 기록 <span>MOVE JOURNAL</span></h2><button id="export" class="icon-button" title="전체 기보 JSON 저장" aria-label="전체 기보 JSON 저장">↓</button></div><div class="journal-columns"><span>수 / 턴</span><span>에이전트의 선택</span></div><div id="journal" class="journal" tabindex="0" aria-label="수를 선택하면 해당 장면으로 이동합니다"></div><div class="journal-foot"><span class="live-dot"></span> 기록을 클릭하면 그 순간으로 이동합니다</div></section>
+</aside>
+</div>
+<section class="transport" aria-label="기보 재생 제어"><div class="transport-buttons"><button id="restart" class="icon-button" title="처음으로 (Home)" aria-label="처음으로">↺</button><button id="prev" class="icon-button" title="이전 수 (←)" aria-label="이전 수">❮</button><button id="play" class="play-button" aria-label="재생"><span id="play-symbol">▶</span><span id="play-label">재생</span></button><button id="next" class="icon-button" title="다음 수 (→)" aria-label="다음 수">❯</button></div><div class="scrubber"><div><span id="move-caption">OPENING</span><span><b id="step-current">000</b> / <span id="step-total">000</span></span></div><input id="timeline" type="range" min="0" max="1" value="0" aria-label="기보 진행 위치"></div><label class="speed-label"><span>재생 속도</span><select id="speed" aria-label="재생 속도"><option value="1800">0.5×</option><option value="1000" selected>1×</option><option value="550">2×</option><option value="280">4×</option></select></label><button id="last" class="outline-button">결과 보기 ↗</button></section>
+<footer class="page-footer"><span>THE GAME <i>/</i> MODEL OBSERVATORY</span><span id="model-info"></span><span><kbd>SPACE</kbd> 재생 <kbd>← →</kbd> 한 수씩</span></footer>
+</main>
+</div>
+<dialog id="rules-dialog"><button id="close-rules" class="close-dialog" aria-label="규칙 닫기">×</button><div class="eyebrow">THE RULES OF THE TABLE</div><h2>98장의 카드.<br><em>남김없이, 모두.</em></h2><p>2부터 99까지의 카드를 네 더미에 모두 내려놓으면 승리합니다.</p><div class="rule-item"><b>↑</b><p><strong>오름차순 더미 두 개</strong>현재 숫자보다 큰 카드를 놓습니다. 시작 숫자는 1.</p></div><div class="rule-item"><b>↓</b><p><strong>내림차순 더미 두 개</strong>현재 숫자보다 작은 카드를 놓습니다. 시작 숫자는 100.</p></div><div class="rule-item"><b>↶</b><p><strong>정확히 10 차이, 되돌리기</strong>오름차순에서는 10 작은 카드, 내림차순에서는 10 큰 카드를 놓을 수 있습니다.</p></div><p>덱이 남아 있으면 한 턴에 최소 2장, 덱이 비면 최소 1장을 냅니다. 턴을 끝낼 때 손패를 8장까지 보충합니다. 필요한 카드를 낼 수 없으면 패배합니다.</p><p class="rule-note">전체 게임은 무작위 98장으로 시작합니다. 커리큘럼은 완승 가능한 경로에서 추출한 후반 상태로 시작합니다. 화면의 선택은 모델의 실제 추론 결과이며, 선택의 이유를 추정해 표시하지 않습니다.</p></dialog>
+<script id="replay-data" type="application/json">__REPLAY_DATA__</script>
+<script>/* REPLAY_SCRIPT */</script>
+</body>
+</html>
