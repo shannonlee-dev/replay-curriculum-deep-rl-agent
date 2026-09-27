@@ -1,0 +1,47 @@
+seed: 42
+device: cpu
+num_envs: 16
+torch_threads: 1
+output_dir: models
+resume: models/1.0.0/reverse_r20.zip
+backward_teacher_prob: 0.30
+stages: [20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 98]
+max_steps_per_stage: 4000000
+min_steps_per_stage: 250000
+eval_interval: 250000
+on_max_steps: stop  # stop or advance; advance is recorded as stalled_advanced
+learning_rate_stage_decay: 1.0
+replay:
+  recent_weights: [0.35, 0.25, 0.15, 0.10]
+  anchors: {20: 0.10, 12: 0.05}
+  distributions: {}
+  # 32: {targets: [12, 16, 20, 24, 28, 32], probs: [0.10, 0.15, 0.20, 0.20, 0.15, 0.20]}
+promotion:
+  current_min_win_rate: 0.60
+  previous_min_win_rate: 0.60
+  older_floor_win_rate: 0.50
+evaluation:
+  games: 1000
+  seed: 100000
+  anchors: [12, 20]
+  all_seen_targets: true
+  balanced_targets: [12, 20, 32, 48, 98]
+  balanced_include_natural: true
+  balanced_metric: mean  # mean or min
+bridge:
+  enabled: true
+  natural_probs: [0.20, 0.40, 0.60, 0.80, 1.0]
+  natural_min_win_rates: [0.01, 0.02, 0.03, 0.04, 0.05]
+  reverse_floor_win_rate: 0.50
+  max_steps_per_phase: 4000000
+ppo:
+  learning_rate: 0.0003
+  n_steps: 1024
+  batch_size: 2048
+  n_epochs: 5
+  gamma: 0.999
+  gae_lambda: 0.98
+  clip_range: 0.2
+  ent_coef: 0.02
+  vf_coef: 0.5
+  net_arch: [256, 256]
