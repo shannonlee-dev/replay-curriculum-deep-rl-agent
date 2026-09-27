@@ -1,0 +1,25 @@
+{
+  "description": "Frozen development evaluations; not held-out benchmarks",
+  "runs": [
+    {
+      "run_id": "A",
+      "source": "run_20260928_013007_960384/evaluations.jsonl",
+      "included_lines": [
+        1,
+        40
+      ],
+      "included_bytes_sha256": "fb0002d7b49ed6f241cc86cc1239916718f54b200e70e0f8ea8dd1a915c2ff91",
+      "config": "a_config.yaml"
+    },
+    {
+      "run_id": "B",
+      "source": "restart_r36_line39/evaluations.jsonl",
+      "included_lines": [
+        1,
+        15
+      ],
+      "included_bytes_sha256": "b9ff397154e489b611d3b1acc744acdba6d7b163b398ddde6901bc5f143dda5f",
+      "config": "b_config.yaml"
+    }
+  ]
+}
