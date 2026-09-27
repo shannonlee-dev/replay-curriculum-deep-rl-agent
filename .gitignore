@@ -1,0 +1,44 @@
+# Python environments, caches and build output
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+/build/
+/dist/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local models, experiment output and raw verification logs
+/models/
+/verification/
+/runs/
+*.monitor.csv
+*.log
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Archives and exported packages
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Local credentials and editor/OS files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Keep curated evidence in docs/data and docs/assets versioned.
