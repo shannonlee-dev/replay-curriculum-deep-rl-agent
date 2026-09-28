@@ -42,3 +42,6 @@ Thumbs.db
 *.swo
 
 # Keep curated evidence in docs/data and docs/assets versioned.
+
+# Immutable pre-package source evidence for strict resume migration.
+!archive/pre_package/source.zip

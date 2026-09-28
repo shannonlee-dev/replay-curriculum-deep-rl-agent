@@ -1,6 +1,6 @@
 import argparse
 import json
-from evaluate import evaluate_model
+from src.evaluation.synthetic import evaluate_model
 
 
 def main():

@@ -14,10 +14,10 @@ import torch
 import yaml
 from sb3_contrib import MaskablePPO
 
-from curriculum import replay_distribution
-from evaluate import evaluate_model, wilson_interval
-from the_game_env import TheGameEnv
-from train_replay_curriculum import ROOT, load_or_create, make_env, run, validate_config
+from src.synthetic.curriculum import replay_distribution
+from src.evaluation.synthetic import evaluate_model, wilson_interval
+from src.env import TheGameEnv
+from src.synthetic.trainer import ROOT, load_or_create, make_env, run, validate_config
 
 
 class TrainingTests(unittest.TestCase):
@@ -26,7 +26,7 @@ class TrainingTests(unittest.TestCase):
         torch.set_num_threads(1)
 
     def config(self, out):
-        c = yaml.safe_load((ROOT/'config.yaml').read_text())
+        c = yaml.safe_load((ROOT/'configs/synthetic.yaml').read_text())
         c.update(num_envs=2, min_steps_per_stage=64, max_steps_per_stage=64,
                  eval_interval=64, output_dir=str(out), device='cpu')
         c['ppo'].update(n_steps=32, batch_size=64, n_epochs=1)
@@ -43,7 +43,7 @@ class TrainingTests(unittest.TestCase):
             c = self.config(base)
             config = Path(td)/'config.yaml'
             config.write_text(yaml.safe_dump(c))
-            command = [sys.executable, str(ROOT/'train_replay_curriculum.py'),
+            command = [sys.executable, '-m', 'src.synthetic.trainer',
                        '--config', str(config), '--from-scratch', '--stop-at', '20']
             result = subprocess.run(command, capture_output=True, text=True, timeout=60)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)

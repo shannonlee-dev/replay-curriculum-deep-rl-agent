@@ -1,5 +1,7 @@
 # 실험 기록
 
+> Historical experiment record. Active workflow: `./run_natural_train.sh`; see [natural replay curriculum](../natural-replay-curriculum.md).
+
 ## 평가 조건과 출처
 
 2026-09-28 로컬 학습 기록에서 두 구간을 보관했습니다. 각 평가는 난이도당 1,000판, seed 100000~100999, deterministic policy를 사용합니다. 같은 seed를 진급과 모델 선택에도 사용했으므로 **개발 평가이며 독립 benchmark가 아닙니다.**
@@ -11,10 +13,10 @@
 
 B는 A의 마지막 평가에서 이어진 실행이 아닙니다. 그래프도 두 실행을 구분합니다. Global timestep은 시작 모델의 기존 학습량을 포함하며 저장소 기본 설정은 B와 같은 60% 기준입니다.
 
-- [평가 CSV](data/development_history.csv): 평가 시점 55개, 미평가 난이도는 빈칸.
-- [A 설정](data/a_config.yaml) / [B 설정](data/b_config.yaml): 경로를 공개용 상대 경로로 정리한 실행 설정.
-- [출처·SHA-256](data/provenance.json): 원본 로그의 상대 경로, 포함 행 범위, 해당 구간 해시.
-- [승률 그래프](assets/development_win_rates.png): 실행별 주요 난이도 변화.
+- [평가 CSV](../data/development_history.csv): 평가 시점 55개, 미평가 난이도는 빈칸.
+- [A 설정](../data/a_config.yaml) / [B 설정](../data/b_config.yaml): 경로를 공개용 상대 경로로 정리한 실행 설정.
+- [출처·SHA-256](../data/provenance.json): 원본 로그의 상대 경로, 포함 행 범위, 해당 구간 해시.
+- [승률 그래프](../assets/development_win_rates.png): 실행별 주요 난이도 변화.
 
 모델 가중치와 원본 전체 로그는 Git에서 제외합니다. CSV로 보고 수치를 확인할 수 있지만 과거 정책 실행이나 동일 학습 궤적 복원은 불가능합니다.
 
@@ -37,7 +39,7 @@ Replay 없는 대조군, 여러 training seed, 별도 평가 seed가 없어 repl
 
 ```bash
 .venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python train_replay_curriculum.py --from-scratch --quick
+.venv/bin/python -m src.synthetic.trainer --from-scratch --quick
 ```
 
 테스트 17개는 sparse reward, 짝수 난이도별 완승 수순, 덱 순서 비노출, 분포·설정 검증, 독립 reset, Wilson 구간, 진급·정체·bridge, 출력 덮어쓰기 방지를 검사합니다. 이 중 원본 환경·R20 모델과의 비교 2개는 로컬 원본 파일이 없으면 건너뜁니다.

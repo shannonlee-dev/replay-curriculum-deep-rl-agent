@@ -4,8 +4,8 @@ import unittest
 
 import numpy as np
 
-from html_model import build_html, record_game
-from the_game_env import TheGameEnv
+from src.tools.html_model import build_html, record_game
+from src.env import TheGameEnv
 
 
 class LegalPolicy:

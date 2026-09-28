@@ -1,0 +1,315 @@
+{
+  "stages": {
+    "4": {
+      "available": {
+        "train": 2024,
+        "validation": 282,
+        "test": 253
+      },
+      "validation": {
+        "wins": 237,
+        "games": 282,
+        "win_rate": 0.8404255319148937,
+        "wilson_ci_95": [
+          0.7931499381553891,
+          0.87855075201707
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 4,
+        "unique_decks": 282,
+        "available_decks": 282,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "8": {
+      "available": {
+        "train": 3569,
+        "validation": 474,
+        "test": 440
+      },
+      "validation": {
+        "wins": 234,
+        "games": 474,
+        "win_rate": 0.4936708860759494,
+        "wilson_ci_95": [
+          0.4488937464075822,
+          0.5385497913672788
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 8,
+        "unique_decks": 474,
+        "available_decks": 474,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "12": {
+      "available": {
+        "train": 3842,
+        "validation": 508,
+        "test": 488
+      },
+      "validation": {
+        "wins": 44,
+        "games": 508,
+        "win_rate": 0.08661417322834646,
+        "wilson_ci_95": [
+          0.06515264719170928,
+          0.11428099008982466
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 12,
+        "unique_decks": 508,
+        "available_decks": 508,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "16": {
+      "available": {
+        "train": 3903,
+        "validation": 513,
+        "test": 492
+      },
+      "validation": {
+        "wins": 12,
+        "games": 513,
+        "win_rate": 0.023391812865497075,
+        "wilson_ci_95": [
+          0.013430655487791392,
+          0.0404380733451818
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 16,
+        "unique_decks": 513,
+        "available_decks": 513,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "20": {
+      "available": {
+        "train": 3946,
+        "validation": 522,
+        "test": 497
+      },
+      "validation": {
+        "wins": 7,
+        "games": 522,
+        "win_rate": 0.013409961685823755,
+        "wilson_ci_95": [
+          0.006510558024304131,
+          0.027419051196419377
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 20,
+        "unique_decks": 522,
+        "available_decks": 522,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "24": {
+      "available": {
+        "train": 3959,
+        "validation": 525,
+        "test": 499
+      },
+      "validation": {
+        "wins": 2,
+        "games": 525,
+        "win_rate": 0.0038095238095238095,
+        "wilson_ci_95": [
+          0.0010453093554895713,
+          0.013782571053313365
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 24,
+        "unique_decks": 525,
+        "available_decks": 525,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "32": {
+      "available": {
+        "train": 3971,
+        "validation": 525,
+        "test": 497
+      },
+      "validation": {
+        "wins": 0,
+        "games": 525,
+        "win_rate": 0.0,
+        "wilson_ci_95": [
+          0.0,
+          0.007264178914820618
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 32,
+        "unique_decks": 525,
+        "available_decks": 525,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "48": {
+      "available": {
+        "train": 3970,
+        "validation": 526,
+        "test": 498
+      },
+      "validation": {
+        "wins": 0,
+        "games": 526,
+        "win_rate": 0.0,
+        "wilson_ci_95": [
+          0.0,
+          0.007250468819360352
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 48,
+        "unique_decks": 526,
+        "available_decks": 526,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "64": {
+      "available": {
+        "train": 3971,
+        "validation": 526,
+        "test": 499
+      },
+      "validation": {
+        "wins": 0,
+        "games": 526,
+        "win_rate": 0.0,
+        "wilson_ci_95": [
+          0.0,
+          0.007250468819360352
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 64,
+        "unique_decks": 526,
+        "available_decks": 526,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "72": {
+      "available": {
+        "train": 3974,
+        "validation": 526,
+        "test": 499
+      },
+      "validation": {
+        "wins": 0,
+        "games": 526,
+        "win_rate": 0.0,
+        "wilson_ci_95": [
+          0.0,
+          0.007250468819360352
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 72,
+        "unique_decks": 526,
+        "available_decks": 526,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "80": {
+      "available": {
+        "train": 3975,
+        "validation": 526,
+        "test": 499
+      },
+      "validation": {
+        "wins": 0,
+        "games": 526,
+        "win_rate": 0.0,
+        "wilson_ci_95": [
+          0.0,
+          0.007250468819360352
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 80,
+        "unique_decks": 526,
+        "available_decks": 526,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    },
+    "84": {
+      "available": {
+        "train": 3975,
+        "validation": 526,
+        "test": 499
+      },
+      "validation": {
+        "wins": 0,
+        "games": 526,
+        "win_rate": 0.0,
+        "wilson_ci_95": [
+          0.0,
+          0.007250468819360352
+        ],
+        "source": "natural_conditioned",
+        "split": "validation",
+        "bucket": 84,
+        "unique_decks": 526,
+        "available_decks": 526,
+        "seed": 200000,
+        "status": "evaluated"
+      }
+    }
+  },
+  "selection": {
+    "stage": 12,
+    "reason": "NC12 selected because it is the hardest scanned stage with demonstrated PPO learnability from prior held-out validation improvement; harder stages had ≤2.3% baseline win rate and no demonstrated learnability.",
+    "selection_method": "explicit_experiment_configuration",
+    "rationale_source": "user_supplied",
+    "baseline_validation": {
+      "wins": 44,
+      "games": 508,
+      "win_rate": 0.08661417322834646,
+      "wilson_ci_95": [
+        0.06515264719170928,
+        0.11428099008982466
+      ],
+      "source": "natural_conditioned",
+      "split": "validation",
+      "bucket": 12,
+      "unique_decks": 508,
+      "available_decks": 508,
+      "seed": 200000,
+      "status": "evaluated"
+    }
+  },
+  "selection_error": null,
+  "model_sha256": "5407e3c94b61bd311a2473529b7bd4b5d15b020f02a43821913b5a4f796b7b7f",
+  "bank_sha256": "10d4c8fe57c5752f07932c2fd0b4945364507b3416d166b02bb7f2b12c8b6609",
+  "evaluation": {
+    "nc_games": 1000,
+    "nc_seed": 200000,
+    "natural_games": 1000,
+    "natural_seed": 900000,
+    "natural_large_games": 10000,
+    "natural_large_interval": 1000000,
+    "synthetic_games": 1000,
+    "synthetic_seed": 100000
+  }
+}

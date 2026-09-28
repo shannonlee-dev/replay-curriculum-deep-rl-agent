@@ -4,7 +4,7 @@ import json
 import math
 import numpy as np
 from sb3_contrib import MaskablePPO
-from the_game_env import TheGameEnv
+from src.env import TheGameEnv
 
 
 def wilson_interval(wins: int, n: int, z: float = 1.96):

@@ -1,0 +1,212 @@
+{
+  "artifact_kind": "verified_experiment_configuration",
+  "training_started": false,
+  "objective": "maximize P(WIN | unconditional random natural full-game start)",
+  "start_selection": {
+    "stage": 12,
+    "reason": "NC12 selected because it is the hardest scanned stage with demonstrated PPO learnability from prior held-out validation improvement; harder stages had ≤2.3% baseline win rate and no demonstrated learnability.",
+    "selection_method": "explicit_experiment_configuration",
+    "rationale_source": "user_supplied",
+    "baseline_validation": {
+      "wins": 44,
+      "games": 508,
+      "win_rate": 0.08661417322834646,
+      "wilson_ci_95": [
+        0.06515264719170928,
+        0.11428099008982466
+      ],
+      "source": "natural_conditioned",
+      "split": "validation",
+      "bucket": 12,
+      "unique_decks": 508,
+      "available_decks": 508,
+      "seed": 200000,
+      "status": "evaluated"
+    }
+  },
+  "promotion": {
+    "mode": "frontier",
+    "min_stage_steps": 250000,
+    "criteria_status": "first_operational_baseline",
+    "criteria_source": "user_specified",
+    "next_stage_min_wins": 25,
+    "next_stage_min_win_rate": 0.05,
+    "retention_relative_floor": 0.7,
+    "retention_absolute_floor": 0.05,
+    "final_stage_rule": "budget_and_retention"
+  },
+  "config": {
+    "seed": 42,
+    "device": "cpu",
+    "num_envs": 16,
+    "torch_threads": 1,
+    "output_dir": "runs/nc84_experiment",
+    "resume": "models/restart_r64_from_line5/stage_R80_complete.zip",
+    "backward_teacher_prob": 0.3,
+    "max_steps_per_stage": 3000000,
+    "eval_interval": 250000,
+    "ppo": {
+      "learning_rate": 0.0003,
+      "n_steps": 1024,
+      "batch_size": 2048,
+      "n_epochs": 5,
+      "gamma": 0.999,
+      "gae_lambda": 0.98,
+      "clip_range": 0.2,
+      "ent_coef": 0.02,
+      "vf_coef": 0.5,
+      "net_arch": [
+        256,
+        256
+      ]
+    },
+    "natural_curriculum": {
+      "stages": [
+        4,
+        8,
+        12,
+        16,
+        20,
+        24,
+        32,
+        48,
+        64,
+        72,
+        80,
+        84
+      ],
+      "start_stage": 12,
+      "start_stage_reason": "NC12 selected because it is the hardest scanned stage with demonstrated PPO learnability from prior held-out validation improvement; harder stages had ≤2.3% baseline win rate and no demonstrated learnability.",
+      "nc_episode_probability": 0.3,
+      "minimum_winning_decks": 1,
+      "minimum_stage_decks": {
+        "train": 1,
+        "validation": 1,
+        "test": 1
+      },
+      "rehearsal": {
+        "current_weight": 0.7,
+        "older_weight": 0.3
+      },
+      "auto_start": {
+        "min_wins": null,
+        "min_win_rate": null
+      },
+      "promotion": {
+        "mode": "frontier",
+        "min_stage_steps": 250000,
+        "criteria_status": "first_operational_baseline",
+        "criteria_source": "user_specified",
+        "next_stage_min_wins": 25,
+        "next_stage_min_win_rate": 0.05,
+        "retention_relative_floor": 0.7,
+        "retention_absolute_floor": 0.05,
+        "final_stage_rule": "budget_and_retention"
+      },
+      "evaluation": {
+        "nc_games": 1000,
+        "nc_seed": 200000,
+        "natural_games": 1000,
+        "natural_seed": 900000,
+        "natural_large_games": 10000,
+        "natural_large_interval": 1000000,
+        "synthetic_games": 1000,
+        "synthetic_seed": 100000
+      }
+    }
+  },
+  "bank_sha256": "10d4c8fe57c5752f07932c2fd0b4945364507b3416d166b02bb7f2b12c8b6609",
+  "model_sha256": "5407e3c94b61bd311a2473529b7bd4b5d15b020f02a43821913b5a4f796b7b7f",
+  "global_steps": 19398656,
+  "bank_unique_winning_decks": 5000,
+  "bank_counts": {
+    "train": {
+      "4": 2024,
+      "8": 3569,
+      "12": 3842,
+      "16": 3903,
+      "20": 3946,
+      "24": 3959,
+      "32": 3971,
+      "48": 3970,
+      "64": 3971,
+      "72": 3974,
+      "80": 3975,
+      "84": 3975
+    },
+    "validation": {
+      "4": 282,
+      "8": 474,
+      "12": 508,
+      "16": 513,
+      "20": 522,
+      "24": 525,
+      "32": 525,
+      "48": 526,
+      "64": 526,
+      "72": 526,
+      "80": 526,
+      "84": 526
+    },
+    "test": {
+      "4": 253,
+      "8": 440,
+      "12": 488,
+      "16": 492,
+      "20": 497,
+      "24": 499,
+      "32": 497,
+      "48": 498,
+      "64": 499,
+      "72": 499,
+      "80": 499,
+      "84": 499
+    }
+  },
+  "source_scan": "verification/natural_frontier_nc12_scan_20260928/difficulty_scan.json",
+  "source_scan_sha256": "7389332e5a7b60ef56444f66e9aabff408c0cc0455dacfa0265b4032c849e1cc",
+  "source_preflight": "verification/natural_frontier_operational_preflight_20260928/preflight.json",
+  "source_preflight_sha256": "e4da37974b03592a8ca56c70ce76e6fa7a7a93dfb097466a9ace9e9bf79a072a",
+  "provenance_note": "Scan-only configuration preceded final operational thresholds; identical stages, model, bank and evaluation seeds. No real-bank PPO training.",
+  "code_sha256": {
+    "html_model.py": "3de72cbfb5ca3436a071d06487809e0f084ebe926784f04322b3489cbc1e64bc",
+    "train_natural_conditioned.py": "d84a23cdf3546fcffcc4741b9a4da62e0b95f150c087e77d136a210ab8e6f388",
+    "natural_teacher.py": "ce3722ba794b68382ce76b383508755157d7ebeccb0719b7e0c5f08613064a6c",
+    "evaluate.py": "8a0a95cb38e49df35025b5739822def60fa1274a382e31d2fed467a1bf0bba99",
+    "evaluate_standalone_natural.py": "076f7e22706eb9b1cd76918e5c95a7f7846bde53b5198a0b017810749e79c2f4",
+    "train_natural_reverse.py": "65f6e40226f50cf34117852dc4087467676c6c5fd6e9fac0205cae3538fa0edc",
+    "the_game_env.py": "59ea0a194b1fa8861e9e9453de0f5414b3d03faf8ee9fb7eaeb53ada921f323a",
+    "natural_distribution_audit.py": "acaffda4fe6561c9760d0d47a7a4d7f477be9648ea9d4d25e63a6dd128b7679f",
+    "build_natural_bank.py": "b559d1284c739f32532be3fd6c6d08e788d2402e0fa8be5367ea45032c34efef",
+    "run_natural_campaign.py": "1b7d487e4ff83ab54ef7665778f53a2d4d3952a8fabc2a8a7c579f6bc8fc8eb3",
+    "standalone_natural_heuristic.py": "1ac425a7c414a89a2b7d5eb300ffb280776aa2536a24cb9348d37da4d14ba233",
+    "curriculum.py": "023ee65d3b6278c38d9aa26b20e8cdf64c4e68ff2a334764ffff4f683e876b48",
+    "plot_history.py": "1feb3c6f5314bd13b5f0a1f702ac13f5ad4ab7d5db6cca7cff92e027b3bef436",
+    "dietrich_teacher.py": "3680f5db4ede293f818389ec8c99128e6cad903fd38ef8ca1c9b4a2fae1e07cd",
+    "natural_conditioned_env.py": "8c9521bbfecd8f840701399a882137c9a8313ea701355c49b17c91d0e484efb4",
+    "natural_curriculum.py": "bf74568eed3fe8c38a7a235539aa10dae80307bbe2a8a68a371ad69f0d98a7c6",
+    "natural_usage.py": "6a872fbfd16895e96689ee9c9edbfea7ef36e1c7fd2db2cc073011c6016461e8",
+    "natural_evaluation.py": "461faaf861683eee0628586120c945fb88c151739cb3d9b498f3cdd313a9f1b9",
+    "natural_bank.py": "265b6f56ef17f9acb810cf08c27e8efbb9be36d79d5104b9394cf60f49ddbd34",
+    "audit_nc_direct_mix.py": "fe1e8ed9b0ae8e3ab148014064b55eb425e337616d85c08df64e081730df3ce5",
+    "natural_dashboard.py": "50269b1d07f4859619db3ad8694c03d6a7c423765a04bf211523f2fc7ed27623",
+    "natural_prefix.py": "8170bb8197e88d3dbd061e4ee536df93e6a46daf2c48ba7b84b11e91bd8c18d5",
+    "build_natural_bank_v3.py": "001b22ec2372d623b3967e4a0f061eb1bab6a2305bc07ed1af78be383ec85bba",
+    "evaluate_dietrich_teacher.py": "1bacec5a52510e82f38a3964431c2907e297bacc52f50739df01fb553ac354e3",
+    "random_baseline.py": "771681faadafe06678da03ee9b9ffee320bc75319b5cd3f65476de6571819657",
+    "train_replay_curriculum.py": "4943fcbdc0e28f028c19b3b15290e5309b9fff3cee2052758a144a4cb7e50a9a"
+  },
+  "checks": {
+    "model_free": {
+      "run": 92,
+      "passed": 87,
+      "model_tests_separated": 5
+    },
+    "natural_related": {
+      "run": 60,
+      "passed": 60
+    },
+    "tiny_ppo": "passed: optimizer/weights resume plus 64-transition update and full output pipeline",
+    "bank_preflight": "passed: 5000 unique winning decks; split deficiencies=0; criteria ready=True"
+  }
+}

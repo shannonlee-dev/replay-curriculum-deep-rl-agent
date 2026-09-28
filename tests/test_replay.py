@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from the_game_env import TheGameEnv
+from src.env import TheGameEnv
 
 
 class ReplayEnvironmentTests(unittest.TestCase):
@@ -86,7 +86,7 @@ class ReplayEnvironmentTests(unittest.TestCase):
 
 class CurriculumTests(unittest.TestCase):
     def test_distribution_and_overrides(self):
-        from curriculum import replay_distribution
+        from src.synthetic.curriculum import replay_distribution
         targets, probs = replay_distribution(32, {})
         self.assertAlmostEqual(sum(probs), 1.)
         self.assertIn(12, targets)
@@ -96,7 +96,7 @@ class CurriculumTests(unittest.TestCase):
         self.assertIn(96, replay_distribution(98, {})[0])
 
     def test_promotion_requires_all_win_rate_gates(self):
-        from curriculum import promotion_checks
+        from src.synthetic.curriculum import promotion_checks
         config = dict(current_min_win_rate=.6, previous_min_win_rate=.7, older_floor_win_rate=.5)
         rates = {12: .8, 20: .82, 24: .77, 28: .688, 32: .612}
         checks = promotion_checks(32, rates, [20,24,28,32], config)

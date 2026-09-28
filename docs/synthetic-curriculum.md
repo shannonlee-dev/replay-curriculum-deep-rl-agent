@@ -25,26 +25,26 @@ Linux / Python 3.12 기준입니다. 저장소 루트에서 실행합니다.
 | `--start-at 32` | R32에서 시작. 설정에 있는 단계만 지정 가능 |
 | `--stop-at 48` | R48까지 진행. 진급 실패 시 앞 단계에서 중단될 수 있음 |
 | `--output-dir models/my_run` | 새 실행의 출력 경로 지정 |
-| `--config config.yaml` | 설정 파일 지정 |
+| `--config configs/synthetic.yaml` | 설정 파일 지정 |
 
 ## 평가
 
 설치 이후에는 가상환경 Python으로 직접 실행할 수 있습니다. 아래 경로는 시작 로그의 `Output directory`에 나온 **실제 실행 폴더**로 바꿉니다.
 
 ```bash
-.venv/bin/python evaluate.py --model models/my_run/latest.zip --source reverse --target-remaining 32 --games 1000
-.venv/bin/python evaluate.py --model models/my_run/latest.zip --source natural --games 1000
-.venv/bin/python random_baseline.py --source natural --games 1000
-.venv/bin/python plot_history.py models/my_run/history.csv
+.venv/bin/python -m src.evaluation.synthetic --model models/my_run/latest.zip --source reverse --target-remaining 32 --games 1000
+.venv/bin/python -m src.evaluation.synthetic --model models/my_run/latest.zip --source natural --games 1000
+.venv/bin/python -m src.evaluation.random_baseline --source natural --games 1000
+.venv/bin/python -m src.tools.plot_history models/my_run/history.csv
 ```
 
-자동 평가는 난이도당 1,000판, seed 100000~100999, deterministic policy입니다. 학습 환경과 독립된 평가 환경을 사용합니다. `evaluate.py`는 모든 판을 마친 뒤 출력합니다. 새로운 seed로 평가하려면 `--seed`를 지정합니다.
+자동 평가는 난이도당 1,000판, seed 100000~100999, deterministic policy입니다. 학습 환경과 독립된 평가 환경을 사용합니다. `src/evaluation/synthetic.py`는 모든 판을 마친 뒤 출력합니다. 새로운 seed로 평가하려면 `--seed`를 지정합니다.
 
 평가 대상은 replay 난이도, anchor, 이미 학습한 단계, 고정 balanced panel의 합집합이며 natural도 항상 평가합니다. `evaluation.all_seen_targets: false`로 과거 단계 추가 평가를 줄일 수 있습니다. 평가에 반복 사용한 seed는 개발용이며 최종 일반화 검증에는 별도 seed가 필요합니다.
 
 ## 난이도 분포와 진급
 
-설정은 [config.yaml](../config.yaml)에 있습니다. 기본 분포는 현재 35%, 직전 세 단계 25/15/10%, R20 10%, R12 5%를 합산합니다. 중복 난이도의 비중은 더합니다. 예를 들어 R32는 R12/R20/R24/R28/R32에 5/20/15/25/35%를 배정합니다. R20의 이전 단계는 R16/R12/R8이며 R98의 직전 단계는 R96입니다.
+설정은 [configs/synthetic.yaml](../configs/synthetic.yaml)에 있습니다. 기본 분포는 현재 35%, 직전 세 단계 25/15/10%, R20 10%, R12 5%를 합산합니다. 중복 난이도의 비중은 더합니다. 예를 들어 R32는 R12/R20/R24/R28/R32에 5/20/15/25/35%를 배정합니다. R20의 이전 단계는 R16/R12/R8이며 R98의 직전 단계는 R96입니다.
 
 단계별 분포를 직접 지정할 수도 있습니다.
 

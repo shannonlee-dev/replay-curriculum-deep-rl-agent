@@ -1,0 +1,66 @@
+# Standalone experiment config; never writes to the main run.
+seed: 42
+device: cpu
+num_envs: 16
+torch_threads: 1
+output_dir: runs/nc84_experiment
+resume: models/restart_r64_from_line5/stage_R80_complete.zip
+backward_teacher_prob: 0.30
+stages: [20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 98]
+start_at: 84
+max_steps_per_stage: 3000000
+min_steps_per_stage: 250000
+eval_interval: 250000
+on_max_steps: stop
+learning_rate_stage_decay: 1.0
+replay:
+  recent_weights: [0.35, 0.25, 0.15, 0.10]
+  anchors: {20: 0.10, 12: 0.05}
+  distributions: {}
+promotion:
+  current_min_win_rate: 0.60
+  previous_min_win_rate: 0.60
+  older_floor_win_rate: 0.50
+evaluation:
+  games: 1000
+  seed: 100000
+  anchors: [12, 20]
+  all_seen_targets: true
+  balanced_targets: [12, 20, 32, 48, 98]
+  balanced_include_natural: true
+  balanced_metric: mean
+bridge:
+  enabled: false
+ppo:
+  learning_rate: 0.0003
+  n_steps: 1024
+  batch_size: 2048
+  n_epochs: 5
+  gamma: 0.999
+  gae_lambda: 0.98
+  clip_range: 0.2
+  ent_coef: 0.02
+  vf_coef: 0.5
+  net_arch: [256, 256]
+experiment:
+  nc_probability: 0.30
+  minimum_winning_decks: 5000
+  nc_games: 1000
+  nc_seed: 200000
+  natural_seed: 900000
+  natural_large_games: 10000
+  natural_large_interval: 1000000
+teacher:
+  beam_width: 384
+  candidate_turns_per_state: 10
+  max_nodes_per_deck: 500000
+  timeout_seconds_per_deck: 25
+  policy_top_k_actions: 6
+  stochastic_candidates: 8
+  policy_weight: 0.05
+  value_weight: 1.0
+  future_weight: 0.10
+  backward_weight: 2.0
+  legal_weight: 0.10
+  damage_weight: 0.05
+  progress_weight: 2.0

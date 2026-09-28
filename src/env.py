@@ -4,7 +4,7 @@ import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 
-from curriculum import validate_distribution
+from src.synthetic.curriculum import validate_distribution
 
 
 class TheGameEnv(gym.Env):

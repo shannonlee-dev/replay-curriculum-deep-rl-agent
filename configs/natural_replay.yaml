@@ -1,0 +1,72 @@
+# NC12 start and rationale explicitly selected by the user after the baseline scan.
+# Frontier thresholds are the user-specified first operational baseline; never an objective success verdict.
+seed: 42
+device: cpu
+num_envs: 16
+torch_threads: 1
+output_dir: runs/nc84_experiment
+resume: models/restart_r64_from_line5/stage_R80_complete.zip
+backward_teacher_prob: 0.3
+max_steps_per_stage: 3000000
+eval_interval: 250000
+ppo:
+  learning_rate: 0.0003
+  n_steps: 1024
+  batch_size: 2048
+  n_epochs: 5
+  gamma: 0.999
+  gae_lambda: 0.98
+  clip_range: 0.2
+  ent_coef: 0.02
+  vf_coef: 0.5
+  net_arch:
+  - 256
+  - 256
+natural_curriculum:
+  stages:
+  - 4
+  - 8
+  - 12
+  - 16
+  - 20
+  - 24
+  - 32
+  - 48
+  - 64
+  - 72
+  - 80
+  - 84
+  start_stage: 12
+  start_stage_reason: >-
+    NC12 selected because it is the hardest scanned stage with demonstrated PPO learnability from prior held-out validation improvement; harder stages had ≤2.3% baseline win rate and no demonstrated learnability.
+  nc_episode_probability: 0.3
+  minimum_winning_decks: 1
+  minimum_stage_decks:
+    train: 1
+    validation: 1
+    test: 1
+  rehearsal:
+    current_weight: 0.7
+    older_weight: 0.3
+  auto_start:
+    min_wins: null
+    min_win_rate: null
+  promotion:
+    mode: frontier
+    min_stage_steps: 250000
+    criteria_status: first_operational_baseline
+    criteria_source: user_specified
+    next_stage_min_wins: 25
+    next_stage_min_win_rate: 0.05
+    retention_relative_floor: 0.70
+    retention_absolute_floor: 0.05
+    final_stage_rule: budget_and_retention
+  evaluation:
+    nc_games: 1000
+    nc_seed: 200000
+    natural_games: 1000
+    natural_seed: 900000
+    natural_large_games: 10000
+    natural_large_interval: 1000000
+    synthetic_games: 1000
+    synthetic_seed: 100000

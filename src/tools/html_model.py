@@ -1,6 +1,6 @@
 """Export actual model games to a self-contained, offline replay table.
 
-Run: .venv/bin/python html_model.py
+Run: .venv/bin/python -m src.tools.html_model
 Change only `html_model` below to watch another checkpoint.
 """
 from __future__ import annotations
@@ -14,9 +14,9 @@ from pathlib import Path
 import numpy as np
 from sb3_contrib import MaskablePPO
 
-from the_game_env import TheGameEnv
+from src.env import TheGameEnv
 
-ROOT = Path(__file__).resolve().parent
+from src.common.paths import ROOT
 # Hardcoded model input; relative paths are resolved against this file.
 html_model = "models/best_model.zip"
 OUTPUT = ROOT / "html_model.html"
@@ -91,7 +91,7 @@ def main():
     if not path.is_absolute():
         path = ROOT / path
     if not path.is_file():
-        raise SystemExit(f"Model not found: {path}\nEdit html_model in html_model.py.")
+        raise SystemExit(f"Model not found: {path}\nEdit html_model in src/tools/html_model.py.")
     # Load a single snapshot even if training later updates latest.zip.
     checkpoint = path.read_bytes()
     model = MaskablePPO.load(io.BytesIO(checkpoint), device="cpu")

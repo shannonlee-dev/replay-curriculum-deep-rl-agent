@@ -4,7 +4,7 @@
 
 ## 모델 변경과 기보 재생성
 
-`html_model.py`의 `html_model` 변수에 모델 경로를 하드코딩합니다. 상대 경로는 스크립트가 있는 프로젝트 루트를 기준으로 해석합니다. 이 프로젝트의 모델 폴더 이름은 `models/`입니다.
+`src/tools/html_model.py`의 `html_model` 변수에 모델 경로를 하드코딩합니다. 상대 경로는 스크립트가 있는 프로젝트 루트를 기준으로 해석합니다. 이 프로젝트의 모델 폴더 이름은 `models/`입니다.
 
 ```python
 html_model = "models/best_model.zip"
@@ -13,7 +13,7 @@ html_model = "models/best_model.zip"
 프로젝트 루트에서 실행합니다.
 
 ```bash
-.venv/bin/python html_model.py
+.venv/bin/python -m src.tools.html_model
 ```
 
 기존 학습 의존성을 사용하며 CPU에서 한 번 로드한 모델로 실제 대국을 생성합니다. `SEEDS`는 고정 시드 목록, `REVERSE_TARGET`은 후반 시작의 남은 카드 수입니다. 기본 출력은 전체 게임 3판과 R48 후반 시작 3판이며 성공한 판만 고르지 않습니다. HTML에 모든 기보·스타일·스크립트·한글 폰트를 포함합니다.
@@ -35,7 +35,7 @@ HTML은 생성 당시의 모델 스냅샷입니다. 모델이 추가 학습되�
 
 ## 소스와 확인
 
-- `html_model.py`: 실제 모델 추론, 프레임 기록, 단일 HTML 생성
+- `src/tools/html_model.py`: 실제 모델 추론, 프레임 기록, 단일 HTML 생성
 - `web/replay.html`, `web/replay.css`, `web/replay.js`: 화면과 재생 동작
 - `web/fonts/observatory-ko.woff2`: 화면에 필요한 글리프만 포함한 Noto Sans KR 서브셋
 - `web/fonts/OFL.txt`: 폰트 라이선스. 생성된 HTML에도 포함됩니다.

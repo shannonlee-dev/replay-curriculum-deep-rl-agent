@@ -1,6 +1,5 @@
 from __future__ import annotations
 import argparse
-import copy
 import csv
 import json
 import math
@@ -9,24 +8,17 @@ from pathlib import Path
 import numpy as np
 import torch
 import yaml
-from sb3_contrib import MaskablePPO
 from stable_baselines3.common.env_util import make_vec_env
 
-from curriculum import promotion_checks, replay_distribution, validate_distribution
-from evaluate import evaluate_model
-from plot_history import plot_history
-from the_game_env import TheGameEnv
+from src.synthetic.curriculum import promotion_checks, replay_distribution, validate_distribution
+from src.evaluation.synthetic import evaluate_model
+from src.tools.plot_history import plot_history
+from src.env import TheGameEnv
 
-ROOT = Path(__file__).resolve().parent
+from src.common.paths import ROOT
 
 
-def resolve_checkpoint(value):
-    path = Path(value)
-    candidates = [path, ROOT/path, ROOT/'models'/path.name, ROOT/'models'/'1.0.0'/path.name]
-    for candidate in candidates:
-        if candidate.is_file():
-            return candidate.resolve()
-    raise FileNotFoundError(f'Checkpoint not found: {value}; tried {candidates}')
+from src.common.checkpoints import resolve_checkpoint, load_or_create, save_model
 
 
 def validate_config(c):
@@ -95,23 +87,6 @@ def make_env(c, target, natural_prob, log_dir, seed):
         monitor_dir=str(log_dir),
         monitor_kwargs={'info_keywords': ('won', 'sampled_target_remaining', 'reset_source')},
     )
-
-
-def load_or_create(c, env, checkpoint=None):
-    ppo = copy.deepcopy(c['ppo'])
-    net_arch = ppo.pop('net_arch')
-    common = dict(env=env, device=c['device'], seed=c['seed'], verbose=0, **ppo)
-    if checkpoint:
-        # Override optimizer hyperparameters, not policy_kwargs or learned parameters.
-        model = MaskablePPO.load(str(checkpoint), **common)
-        print(f'Loaded {checkpoint}; inherited global steps={model.num_timesteps}', flush=True)
-        return model
-    return MaskablePPO('MlpPolicy', policy_kwargs={'net_arch': net_arch}, **common)
-
-
-def save_model(model, out, name, metadata):
-    model.save(str(out/name))
-    (out/f'{name}.json').write_text(json.dumps(metadata, indent=2)+'\n')
 
 
 def run(c, checkpoint, *, stop_at=None, quick=False):
@@ -250,7 +225,7 @@ def run(c, checkpoint, *, stop_at=None, quick=False):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument('--config', default=str(ROOT/'config.yaml'))
+    p.add_argument('--config', default=str(ROOT/'configs/synthetic.yaml'))
     group = p.add_mutually_exclusive_group()
     group.add_argument('--resume')
     group.add_argument('--from-scratch', action='store_true')
